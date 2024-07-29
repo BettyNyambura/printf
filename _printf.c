@@ -1,45 +1,47 @@
-#include "bettysum.h"
+#include "main.h"
+#include <unistd.h>
 /**
- * _printf - produces output according to format.
- * @format: character string
+ * _printf - Emulate the original.
  *
- * Return: number of characters.
+ * @format: Format by specifier.
+ *
+ * Return: count of chars.
  */
-
 int _printf(const char *format, ...)
 {
-int (*pfunc)(va_list, flags_t *);
-	const char *p;
-	va_list arguments;
-	flags_t flags = {0, 0, 0};
+	int i = 0, count = 0, count_fun;
+	va_list args;
 
-	register int count = 0;
-
-	va_start(arguments, format);
+	va_start(args, format);
 	if (!format || (format[0] == '%' && !format[1]))
 		return (-1);
 	if (format[0] == '%' && format[1] == ' ' && !format[2])
 		return (-1);
-	for (p = format; *p; p++)
+	while (format[i])
 	{
-		if (*p == '%')
+		count_fun = 0;
+		if (format[i] == '%')
 		{
-			p++;
-			if (*p == '%')
+			if (!format[i + 1] || (format[i + 1] == ' ' && !format[i + 2]))
 			{
-				count += _putchar('%');
-				continue;
+				count = -1;
+				break;
 			}
-			while (get_flag(*p, &flags))
-				p++;
-			pfunc = get_print(*p);
-			count += (pfunc)
-				? pfunc(arguments, &flags)
-				: _printf("%%%c", *p);
-		} else
-			count += _putchar(*p);
+			count_fun += get_function(format[i + 1], args);
+			if (count_fun == 0)
+				count += _putchar(format[i + 1]);
+			if (count_fun == -1)
+				count = -1;
+			i++;
+		}
+		else
+		{
+			(count == -1) ? (_putchar(format[i])) : (count += _putchar(format[i]));
+		}
+		i++;
+		if (count != -1)
+			count += count_fun;
 	}
-	_putchar(-1);
-	va_end(arguments);
+	va_end(args);
 	return (count);
 }
