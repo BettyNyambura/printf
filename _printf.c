@@ -1,4 +1,4 @@
-#include "main.h"
+#include "bettysum.h"
 /**
  * _printf - produces output according to format.
  * @format: character string
@@ -8,56 +8,38 @@
 
 int _printf(const char *format, ...)
 {
-int char_print = 0;
-va_list list_of_arg;
+int (*pfunc)(va_list, flags_t *);
+	const char *p;
+	va_list arguments;
+	flags_t flags = {0, 0, 0};
 
-if (format == NULL)
-	return (-1);
+	register int count = 0;
 
-va_start(list_of_arg, format);
-	while (*format)
+	va_start(arguments, format);
+	if (!format || (format[0] == '%' && !format[1]))
+		return (-1);
+	if (format[0] == '%' && format[1] == ' ' && !format[2])
+		return (-1);
+	for (p = format; *p; p++)
 	{
-	if (*format != '%')
-	{
-	write(1, format, 1);
-	char_print++;
+		if (*p == '%')
+		{
+			p++;
+			if (*p == '%')
+			{
+				count += _putchar('%');
+				continue;
+			}
+			while (get_flag(*p, &flags))
+				p++;
+			pfunc = get_print(*p);
+			count += (pfunc)
+				? pfunc(arguments, &flags)
+				: _printf("%%%c", *p);
+		} else
+			count += _putchar(*p);
 	}
-	else
-	{
-	format++;
-	if (*format == '\0')
-	break;
-	if (*format == '%')
-	{
-	write(1, format, 1);
-	char_print++;
-	}
-	else if (*format == 'c')
-	{
-	char c = va_arg(list_of_arg, int);
-	write(1, &c, 1);
-	char_print++;
-	}
-	else if (*format == 's')
-	{
-	char *str = va_arg(list_of_arg, char *);
-	if (str == NULL)
-	str = "(null)";
-	while (*str)
-	{
-	write(1, str, 1);
-	str++;
-	char_print++;
-	}
-	}
-	else
-	{
-	write(1, format, 1);
-	char_print++;
-	}
-	}
-	format++;
-	}
-va_end(list_of_arg);
-return (char_print);
+	_putchar(-1);
+	va_end(arguments);
+	return (count);
 }
