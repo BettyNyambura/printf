@@ -5,8 +5,11 @@
 #include <unistd.h>
 #include <stddef.h>
 
-int putChar(char c);
+int _putChar(char c);
 int _printf(const char *format, ...);
-int  printS_int(va_list list_of_arg);
+int print_int(va_list list_of_arg);
+int print_char(va_list args);
+int print_string(va_list args);
+int print_percent(va_list args);
 
 #endif
