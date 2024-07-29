@@ -27,8 +27,6 @@ va_start(list_of_arg, format);
 	format++;
 	if (*format == '\0')
 	break;
-	}
-
 	if (*format == '%')
 	{
 	write(1, format, 1);
@@ -37,26 +35,29 @@ va_start(list_of_arg, format);
 	else if (*format == 'c')
 	{
 	char c = va_arg(list_of_arg, int);
-
 	write(1, &c, 1);
 	char_print++;
 	}
-
 	else if (*format == 's')
 	{
 	char *str = va_arg(list_of_arg, char *);
-	int str_len = 0;
-
-	while (str[str_len] != '\0')
-	str_len++;
-	write(1, str, str_len);
-	char_print += str_len;
+	if (str == NULL)
+	str = "(null)";
+	while (*str)
+	{
+	write(1, str, 1);
+	str++;
+	char_print++;
 	}
-
+	}
+	else
+	{
+	write(1, format, 1);
+	char_print++;
+	}
+	}
 	format++;
-
 	}
-
 va_end(list_of_arg);
 return (char_print);
 }
