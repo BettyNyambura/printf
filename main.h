@@ -2,32 +2,17 @@
 #define MAIN_H
 
 #include <stdio.h>
-#include <stdlib.h>
 #include <stdarg.h>
-
-
-/**
- * struct format - Struct for format
- * @specifiers: Struct format
- * @f: The function associated
- */
-
-typedef struct specifiers
-{
-	char specifiers;
-	int (*f)(va_list);
-} specifiers_t;
-
-/*prototypes*/
+#include <string.h>
+#include <unistd.h>
+#include <limits.h>
 int _printf(const char *format, ...);
-int get_function(char s, va_list args);
-int _putchar(char c);
-
-/*Conversion specifiers*/
-int print_char(va_list args);
 int print_string(va_list args);
-int print_digit(va_list args);
-int print_mod(va_list args);
-int print_rev_string(va_list args);
+int print_character(va_list args);
+int print_percent(__attribute__((unused))va_list args);
+int  print_number(va_list args);
+int print_binary(va_list args);
+void _printDefault(__attribute__((unused))va_list agrs, const char *format);
+int putChar(char c);
 
 #endif
