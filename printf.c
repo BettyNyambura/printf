@@ -1,6 +1,6 @@
 #include "main.h"
 
-int handle_format(const char *format, va_list args, int count);
+//int handle_format(const char *format, va_list args, int count);
 
 /**
  * _printf - produces output according to format.

@@ -14,5 +14,6 @@ int  print_number(va_list args);
 int print_binary(va_list args);
 void _printDefault(__attribute__((unused))va_list agrs, const char *format);
 int putChar(char c);
+int handle_format(const char *format, va_list args, int count);
 
 #endif
