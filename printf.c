@@ -20,7 +20,10 @@ int _printf(const char *format, ...)
 		if (*format == '%')
 		{
 			format++;
+			if (*format != '\0')
+			{
 			count = handle_format(format, args, count);
+			}
 		}
 		else
 		{
@@ -76,7 +79,7 @@ int handle_format(const char *format, va_list args, int count)
 			count += print_hex_upper(args);
 			break;
 		default:
-			_printDefault(args, format);
+			_printDefault(format);
 			count += 2;
 	}
 	return (count);
