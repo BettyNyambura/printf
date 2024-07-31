@@ -6,7 +6,7 @@
  *
  * Return: nothing
  */
-void _printDefault(__attribute__((unused))va_list args, const char *format)
+void _printDefault(const char *format)
 {
 	putChar('%');
 	putChar(*format);
