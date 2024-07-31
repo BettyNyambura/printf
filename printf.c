@@ -63,6 +63,18 @@ int handle_format(const char *format, va_list args, int count)
 		case 'd':
 			count += print_number(args);
 			break;
+		case 'u':
+			count += print_unsigned(args);
+			break;
+		case 'o':
+			count += print_octal(args);
+			break;
+		case 'x':
+			count += print_hex_lower(args);
+			break;
+		case 'X':
+			count += print_hex_upper(args);
+			break;
 		default:
 			_printDefault(args, format);
 			count += 2;
