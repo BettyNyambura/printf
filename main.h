@@ -15,5 +15,9 @@ int print_binary(va_list args);
 void _printDefault(__attribute__((unused))va_list args, const char *format);
 int putChar(char c);
 int handle_format(const char *format, va_list args, int count);
+int print_unsigned(va_list arg);
+int print_octal(va_list arg);
+int print_hex_lower(va_list arg);
+int print_hex_upper(va_list arg);
 
 #endif
