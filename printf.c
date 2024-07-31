@@ -64,7 +64,7 @@ int handle_format(const char *format, va_list args, int count)
 			count += print_number(args);
 			break;
 		default:
-			_printDefault(format);
+			_printDefault(args, format);
 			count += 2;
 	}
 	return (count);
