@@ -81,9 +81,6 @@ int handle_format(const char *format, va_list args, int count)
 		case 'S':
 			count += print_custom_string(args);
 			break;
-		case 'p':
-			count += print_pointer(args);
-			break;
 		default:
 			_printDefault(format);
 			count += 2;
