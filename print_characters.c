@@ -8,10 +8,10 @@
 
 int print_character(va_list args)
 {
-	int i = 0;
-	char character;
+        int i = 0;
+        char character;
 
-	character = va_arg(args, int);
-	i = putChar(character);
-	return (i);
+        character = va_arg(args, int);
+        i = putChar(character);
+        return (i);
 }
