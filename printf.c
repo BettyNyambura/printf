@@ -78,6 +78,9 @@ int handle_format(const char *format, va_list args, int count)
 		case 'X':
 			count += print_hex_upper(args);
 			break;
+		case 'S':
+			count += print_custom_string(args);
+			break;
 		default:
 			_printDefault(format);
 			count += 2;
