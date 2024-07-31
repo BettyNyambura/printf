@@ -38,3 +38,4 @@ int print_hex_lower(va_list arg)
 	}
 
 	return (len);
+}
