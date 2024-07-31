@@ -26,7 +26,7 @@ int print_binary(va_list arg)
 		i--;
 		while (i >= 0)
 		{
-			_putchar(binary[i] + '0');
+			putchar(binary[i] + '0');
 			len++;
 			i--;
 		}
