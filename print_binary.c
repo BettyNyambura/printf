@@ -1,36 +1,36 @@
 #include "main.h"
-
 /**
- * print_binary - Prints decimal in binary
- * @args: List of arguments
- * Return: Number of characters printed
+ * print_binary - prints an integer in binary format
+ * @arg: argument to print
+ * Return: number of characters printed
  */
-
-int print_binary(va_list args)
+int print_binary(va_list arg)
 {
-	unsigned int num;
-	int i, j;
-	int binary[32]; // Maximum bits for an unsigned int
-	
-	num = va_arg(args, unsigned int);
-	if (num == 0)
+	unsigned int n = va_arg(arg, unsigned int);
+	int i = 0, len = 0;
+	int binary[32];
+
+	if (n == 0)
 	{
-	putChar('0');
-	return (1);
+		_putchar('0');
+		len++;
+	}
+	else
+	{
+		while (n > 0)
+		{
+			binary[i] = n % 2;
+			n /= 2;
+			i++;
+		}
+		i--;
+		while (i >= 0)
+		{
+			_putchar(binary[i] + '0');
+			len++;
+			i--;
+		}
 	}
 
-	i = 0;
-	while (num > 0)
-	{
-	binary[i] = num % 2;
-	num /= 2;
-	i++;
-	}
-
-	for (j = i - 1; j >= 0; j--)
-	{
-	putChar('0' + binary[j]);
-	}
-
-	return (i);
+	return (len);
 }
