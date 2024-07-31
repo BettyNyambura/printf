@@ -12,7 +12,7 @@ int print_binary(va_list arg)
 
 	if (n == 0)
 	{
-		_putchar('0');
+		putchar('0');
 		len++;
 	}
 	else
