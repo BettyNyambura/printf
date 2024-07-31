@@ -69,3 +69,4 @@ int handle_format(const char *format, va_list args, int count)
 	}
 	return (count);
 }
+
